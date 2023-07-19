@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class='content-section'>
+
+    Xếp hạng điểm thi Tốt nghiệp THPT 2022: Tra cứu xếp hạng theo khối và khu vực</h1>
+    <p style="text-align:left;"><span style="color: #ff0000;"><strong>Tra cứu xếp hạng điểm thi tốt nghiệp THPT
+                theo khối và khu vực </strong></span></p>
+
+    <!-- input -->
+    <form method="POST" action="{{ url_for('tracuu_thuhang') }}">
+        <div class="seach-shol" style="margin-top: 5px;">
+            <strong class="clblue2">Chọn khu vực:</strong>(<span style="color: red">*</span>)
+            <select style="width:150px" id="vung" name="vung">
+                <option value="CN">Toàn quốc</option>
+                <option value="MB">Miền Bắc</option>
+                <option value="MT">Miền Trung</option>
+                <option value="MN">Miền Nam</option>
+            </select>
+        </div>
+
+        <div class="seach-shol" style="margin-top: 5px;">
+            <strong class="clblue2">Chọn Khối thi:</strong>(<span style="color: red">*</span>)
+            <select style="width:150px" id="block_code" name="block_code">
+                <option value="A00">A00</option>
+                <option value="A01">A01</option>
+                <option value="B00">B00</option>
+                <option value="C00">C00</option>
+                <option value="D01">D01</option>
+                <option value="A00-A01">A00-A01</option>
+                <option value="A00-B00">A00-B00</option>
+                <option value="D01-C00">D01-C00</option>
+            </select>
+        </div>
+        <div class="seach-shol" style="margin-bottom: 5px;">
+            <strong class="clblue2">Tổng điểm theo khối:</strong>(<span style="color: red">*</span>)
+            
+            <input id="total_mark" type="text" name="total_mark" style="margin-left:10px;width:385px"
+                placeholder="Nhập tổng điểm theo khối của bạn">
+            <input type="submit" value="Tra Cứu">
+        </div>
+
+    </form>
+    <p><strong>Lưu ý:</strong> Tổng điểm theo khối chưa bao gồm điểm cộng.</p>
+    <!-- Hiện thị kết quả tra cứu -->
+    {% if rank and rank_same and block_code and vung: %}
+    <div>
+        <p>-Khu vực : {{vung}}</p>
+        <p>- Khối Thi : {{block_code}}</p>
+        <p>- Tổng số thí sinh có lớn hơn {{ total_mark }} : <span style="color: red">{{ rank }}</span>  </p>
+        <p>- Tổng số thí sinh có điểm bằng {{ total_mark }} : <span style="color: red">{{ rank_same }}</span> </p>
+    </div>
+    {% endif %}
+
+
+
+
+    <p><strong>Xếp hạng điểm thi 2022 của thí sinh theo khối: </strong></p>
+    <p>- Khối A: A00, A01</p>
+    <p>- Khối B: B00</p>
+    <p>- Khối C: C00;</p>
+    <p>- Khối D: D01;</p>
+    <p><strong>Xếp hạng điểm thi theo vùng miền: </strong></p>
+    <p style="text-align: justify;"><strong>- Miền Bắc: </strong>Hoà Bình, Sơn La, Điện Biên, Lai Châu, Lào Cai, Hà
+        Giang Cao Bằng, Bắc Kạn, Yên Bái, Lạng Sơn, Tuyên Quang, Thái Nguyên, Phú Thọ, Bắc Giang, Quảng Ninh, Hà Nội
+        và Hải Phòng, Vĩnh Phúc, Bắc Ninh, Hà Nam, Hải Dương, Hưng Yên, Nam Định, Ninh Bình, Thái Bình,Thanh Hoá,
+        Nghệ An, Hà Tĩnh.</p>
+    <p style="text-align: justify;"><strong>- Miền Trung: </strong> Quảng Bình, Quảng Trị và Thừa Thiên-Huế, Đà
+        Đẵng, Quảng Nam, Quảng Ngãi, Bình Định, Phú Yên, Khánh Hoà, Ninh Thuận, Bình Thuận, Kon Tum, Gia Lai, Đắc
+        Lắc, Đắc Nông và Lâm Đồng.</p>
+    <p style="text-align: justify;"><strong>- Miền Nam:</strong> Bình Phước, Bình Dương, Đồng Nai, Tây Ninh, Bà
+        Rịa-Vũng Tàu và Thành phố Hồ Chí Minh, Long An, Đồng Tháp, Tiền Giang, An Giang, Bến Tre, Vĩnh Long, Trà
+        Vinh, Hậu Giang, Kiên Giang, Sóc Trăng, Bạc Liêu, Cà Mau, Cần Thơ. </p>
+    
+</div>
+</div>
+<!-- START POS_CODE pc_center_middle -->
+<!-- END POS_CODE: pc_center_middle -->
+
+
+
+</div>
+{% endblock content %}

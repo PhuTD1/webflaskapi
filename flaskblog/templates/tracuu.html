@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class = 'content-section'>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Tra cứu kết quả Tốt Nghiệp THPT 2022</legend>
+            <div class="form-group">
+                {{ form.sbd.label(class ="form-control-label") }}
+                {% if form.sbd.errors %}
+                <div class="invalid-feedback" >
+                    {% for error in form.sbd.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.sbd(class ="form-control form-control-lg") }}
+
+                {% endif %}
+            </div>
+            
+        </fieldset>
+        <div class="form-group"> 
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+
+
+
+  <table class="table table-bordered">
+    {% if student.empty == False  %}
+      {% for key , value in student.iloc[0].dropna().items()%}
+        {% if value%}
+          <tbody>
+            <tr>
+              <th scope="row">{{ key }}</th>
+              <td>{{ value }}</td>
+            </tr>
+          </tbody>
+        {% endif %} 
+      {% endfor %}
+    {% endif %}
+  </table>
+{% endblock content %}
